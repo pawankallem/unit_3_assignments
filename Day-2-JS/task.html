@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0px;
+            /* background-color: red; */
+            box-sizing: border-box;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            grid-gap: 20px;
+            padding: 50px;
+            font-size: 30px;
+            text-align: center;
+        }
+       body> div:nth-child(1){
+            display: grid;
+            grid-gap: 20px;
+            width: 45%;
+            height: 150px;
+        }
+        body>div:nth-child(2){
+            width: 40%;
+           
+        }
+        th,td{
+            border: 2px solid black;
+            padding:10px 30px;
+            width: 25%;
+        }
+        input,button,label{
+            width:50%;
+            margin: auto;
+            height: 40px;
+            font-size: 20px;
+            
+        }
+        button{
+            width: 150px;
+        }
+        div>#count{
+            color: red;
+            text-align: right;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div id="input">
+        <label>Enter Name Of The Task</label>
+        <input type="text" id="nameOfTask" placeholder="Task Name">
+        <button onclick="taskOf()">Submit</button>
+    </div>
+    <div>
+        <h1 id="count"></h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name Of Task</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Done</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+<script>
+
+var count=0;
+
+function taskOf(){
+
+    // displaying total number of tasks
+    count++;
+    document.querySelector("#count").textContent=count;
+
+
+    // creating variable to collect values of input 
+    let taskname=document.querySelector("#nameOfTask").value;
+
+
+    // sending input value to function and collecting in new variable
+    let n1=new printOutput(taskname);
+    // console.log(n1);
+
+
+    // to display data in window creating table rows and coloms
+    let row=document.createElement("tr");
+    let td1=document.createElement("td");
+    td1.textContent=n1.name;
+    let td2=document.createElement("td");
+    td2.textContent=n1.date;
+    let td4=document.createElement("td");
+    let td5=document.createElement("td");
+
+    // creating done button and Onclick done task
+    let donebtn=document.createElement("button");
+    donebtn.textContent="Done";
+    donebtn.addEventListener('click',function(){
+        row.style.color="green";
+        row.style.textDecoration="line-through";
+        if(td3.textContent=="False"){
+            td3.textContent="True";
+            td3.style.backgroundColor="green";
+        }
+    })
+
+    
+    let td6=document.createElement("td");
+
+    // creating and doing remove button task
+    let romovebtn=document.createElement("button");
+    romovebtn.textContent="Remove";
+    romovebtn.addEventListener("click",function(){
+        row.innerHTML="";
+        count--;
+        document.querySelector("#count").textContent=count;
+
+    })
+
+    // taking the boolean values if task done is true or false
+    let td3=document.createElement("button");
+    td3.textContent="False";
+    td3.style.backgroundColor="red";
+    td3.addEventListener("click",function(){
+        
+        if(this.textContent=="True"){
+            this.textContent="False";
+            this.style.backgroundColor="red";
+        }
+        else{
+            this.textContent="True";
+            this.style.backgroundColor="green";
+        }
+    });
+
+    // appending the data
+    td4.append(td3);
+    td5.append(donebtn);
+    td6.append(romovebtn);
+
+    // appending td's to row
+    row.append(td1,td2,td4,td5,td6);
+
+    // data accesessing to web page
+    document.querySelector("tbody").append(row);
+}
+
+function printOutput(taskname){
+    // function takes input value and returns these values 
+    this.name=taskname;
+    this.date=new Date();
+    this.status="false";
+
+}
+
+
+</script>

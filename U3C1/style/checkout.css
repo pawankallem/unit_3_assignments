@@ -1,0 +1,28 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+    text-align: center;
+}
+body{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+}
+
+body>div{
+    display: grid;
+    border:1px solid ;
+    width: 370px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: red;
+}
+
+input{
+    height: 50px;
+    width: 90%;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 20px;
+}

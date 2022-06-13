@@ -1,0 +1,66 @@
+
+
+    * {
+        margin: 0px;
+        box-sizing: border-box;
+      }
+      #navbar > div {
+        color: white;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+      #navbar > div > div > a {
+        text-decoration: none;
+        border: 1px solid gray;
+        border-radius: 10px;
+        background-color: white;
+        padding: 5px;
+        color: red;
+      }
+      #navbar {
+        display: flex;
+        width: 100%;
+        height: 60px;
+        gap: 20px;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        background-color: red;
+        color: blue;
+      }
+      #pages {
+        display: flex;
+        gap: 15px;
+        height: 40px;
+      }
+      #searchByname {
+        width: 40%;
+        gap: 10px;
+      }
+      #input {
+        width: 77%;
+        height: 40px;
+        border-radius: 20px;
+        text-align: center;
+      }
+      #search {
+        width: 21%;
+        height: 40px;
+        border-radius: 20px;
+        text-align: center;
+      }
+      #home {
+        height: 40px;
+        width: 10%;
+      }
+      #home>a{
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        background-color: white;
+        padding: 5px;
+        color: red;
+      }

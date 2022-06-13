@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="url">
+    <button onclick="addSlides()">Add Slides</button>
+    <button onclick="homePage()">Go to HomePage</button>
+</body>
+</html>
+
+<script>
+
+    let arr=JSON.parse(localStorage.getItem("images"))||[];
+    
+    function addSlides(){
+        let url=document.getElementById("url").value;
+        arr.push(url);
+        localStorage.setItem("images",JSON.stringify(arr));
+        console.log(arr);
+    }
+    function homePage(){
+        setTimeout(function(){
+            window.location.href="Home.html";
+        },2000)
+    }
+
+</script>

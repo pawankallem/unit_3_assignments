@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            background-color: black;
+            color: rgba(255, 217, 0, 0.603);
+            margin: 0px;
+            box-sizing: border-box;
+            font-size: 22px;
+        }
+        #serchBox{
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+            
+        }
+        #movie{
+            width: 75%;
+            height: 50px;
+            border-radius: 10px ;
+            color: red;
+        }
+        #button{
+            width: 20%;
+            height: 50px;
+            border-radius: 10px ;
+        }
+        #results{
+            display: flex;
+            padding: 30px;
+            width: 700px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        #results>div{
+            margin: 20px;
+            width: 300px;
+            height: 500px;
+            text-align: center;
+        }
+        #results>div>div,p,h1,h3{
+            padding:10px;
+        }
+        #results>div>h1{
+            font-size: 2em;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div id="serchBox">
+        <input type="text" id="movie" placeholder="enter movie">
+        <button id="button" onclick="getmovies()">Search</button>
+    </div>
+    <div id="results"></div>
+    
+</body>
+</html>
+
+
+<script>
+
+    let container=document.querySelector("#results");
+
+    async function getmovies(){
+
+        try{
+            let movie=document.getElementById("movie").value;
+
+            let x=await fetch(`http://www.omdbapi.com/?apikey=cdbc8ebc&t=${movie}`)
+
+            let data=await x.json();
+
+                console.log(data);
+
+                if(data.Response=="False"){
+                    container.innerHTML="";
+                    let img=document.createElement("img");
+                    img.style.width="100%";
+                    img.style.height="400px";
+                    img.src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcflDmA1iW2NaWVM_rXHP7i6t4aU_yBDfmJQ&usqp=CAU";
+                    container.append(img);
+                    console.log('hi')
+                }
+                else{
+                    showResults(data);
+                }
+
+        }
+        catch(err){
+            console.log('err:', err)
+            
+        }
+    }
+
+    function showResults(data){
+
+        container.innerHTML="";
+
+        let imgdiv=document.createElement("div");
+
+        let contentdiv=document.createElement("div");
+
+        let img=document.createElement("img");
+        img.src=data.Poster;
+
+        let h1=document.createElement("h1");
+        h1.textContent=data.Title;
+
+        let aboverat=document.createElement("div");
+
+
+        let recomonded=document.createElement("h4");
+        recomonded.textContent="Recommended"
+
+        let div1=document.createElement("h4");
+        div1.textContent=data.imdbRating;
+        div1.style.marginLeft="20px"
+
+        let div2=document.createElement("div");
+        div2.textContent=data.Released;
+
+        let p=document.createElement("p");
+        p.textContent=data.Plot;
+
+        let director=document.createElement('div');
+        director.textContent=data.Director;
+
+        let language=document.createElement("div");
+        language.textContent=data.Language;
+
+        let time=document.createElement("div");
+        time.textContent=data.Runtime;
+
+
+        imgdiv.append(img)
+
+        if(div1.textContent>8.5){
+            aboverat.append(recomonded,div1);
+            aboverat.style.display="flex";
+            recomonded.style.color="red";
+            contentdiv.append(h1,div2,director,language,time,aboverat,p);
+        }
+        else{
+            contentdiv.append(h1,div2,director,language,time,div1,p);
+        }
+
+        container.append(imgdiv,contentdiv);
+    }
+
+
+</script>

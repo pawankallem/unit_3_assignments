@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Lato", sans-serif;
+        text-align: center;
+      }
+      .name {
+        float:left;
+        width: 30%;
+        height: 550px;
+        display: grid;
+      }
+      .name button {
+        color: black;
+        border: 1px solid #ccc;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 2em;
+        border-radius: 5px;
+      }
+      .container {
+        float: left;
+        padding: 0px 12px;
+        border: 1px solid #ccc;
+        width: 70%;
+        border-left: none;
+        height: 550px;
+        line-height: 50px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div><h1>Mini JavaScript Datatype Learning App</h1></div>
+
+    <div class="name">  
+      <button
+        class="dataLinks"
+        onclick="openData(event, 'obj')"
+        id="defaultOpen"
+      >
+        Objects
+      </button>
+      <button class="dataLinks" onclick="openData(event, 'arr')">Arrays</button>
+      <button class="dataLinks" onclick="openData(event, 'functions')">
+        Functions
+      </button>
+      <button class="dataLinks" onclick="openData(event, 'str')">
+        Strings
+      </button>
+      <button class="dataLinks" onclick="openData(event, 'num')">Number</button>
+      <button class="dataLinks" onclick="openData(event, 'null')">Null</button>
+      <button class="dataLinks" onclick="openData(event, 'undefined')">
+        Undefined
+      </button>
+    </div>
+
+    <div id="obj" class="container">
+        <div><h1>OBJECT</h1></div>
+        <ul>
+            <li><b><i>Defination:</i></b>an object is a standalone entity, with properties and type</li>
+            <li><b><i>Example:</i></b>Compare it with a cup, for example. A cup is an object, with properties. A cup has a color, a design, weight, a material it is made of, etc.</li>
+            <li>JavaScript objects can have properties, which define their characteristics.</li>
+            <li>Inside Object,It containes Key-Value Pairs</li>
+            <li><b><i>Some Inbuilt Function:</i></b>
+                Object.keys(),Object.values(),Object.freeze();
+            </li>
+        </ul>
+    </div>
+    <div id="arr" class="container">
+        <div><h1>ARRAY</h1></div>
+        <ul>
+            <li><b><i>Defination:</i></b>
+                The JavaScript Array class is a global object that is used in the construction of arrays; which are high-level, list-like objects.</li>
+            <li>An array is a special variable, which can hold more than one value</li>
+            <li><b><i>Exaple:</i></b>var cars = [
+                "Saab",
+                "Volvo",
+                "BMW"
+              ];</li>
+            <li>Arrays stores Data in format of 1D,2D and 3D </li>
+            <li><b><i>Inbuilt Functions:</i></b>
+            Array.pop(),Array.push(),Array.shift()</li>
+        </ul>
+    </div>
+    <div id="functions" class="container">
+        <div><h1>FUNCTION</h1></div>
+        <ul>
+            <li><b><i>Defination:</i></b>
+                A JavaScript function is a block of code designed to perform a particular task.
+                A JavaScript function is executed when "something" invokes it (calls it).</li>
+            <li>Variables declared within a JavaScript function, become LOCAL to the function.
+                Local variables can only be accessed from within the function.</li>
+            <li><b><i>Syntax:</i></b>
+                function myFunction() {
+                    alert("Hello World!");
+                  }</li>
+            <li>All The Inbuilt Functions are Designed using Functions and We can Invoke them Using NameofFunction().</li>
+        </ul>
+    </div>
+    <div id="str" class="container">
+        <div><h1>STRING</h1></div>
+        <ul>
+            <li>String is A Premitive Data Type</li>
+            <li><b><i>Defination:</i></b>
+                The String object is used to represent and manipulate a sequence of characters.
+            </li>
+            <li><b><i>Syntax:</i></b>
+            let string="This is Creation Of string";</li>
+        </ul>
+    </div>
+    <div id="num" class="container">
+        <div><h1>NUMBER</h1></div>
+        <ul>
+            <li>Number is a primitive wrapper object used to represent and manipulate numbers like 37 or -9.25.</li>
+            <li>Number() <br>
+                Creates a new Number value.</li>
+            <li>To Convert String to Number : <br>
+                Number(input) Or +(input);
+            </li>
+            <li>We can give number input without quotes.</li>
+        </ul>
+    </div>
+    <div id="null" class="container">
+        <div><h1>NULL</h1></div>
+        <ul>
+            <li><b><i>Defination:</i></b>
+                The value null represents the intentional absence of any object value. It is one of JavaScript's primitive values and is treated as falsy for boolean operations.</li>
+            <li>Null is a Empty Object.</li>
+            <li>You assign this value to the variable or object to wipe out all the data in it.</li>
+            <li>It’s just a special value which represents “nothing”, “empty” or “value unknown”.</li>
+        </ul>
+    </div>
+    <div id="undefined" class="container">
+        <div><h1>UNDEFINED</h1></div>
+        <ul>
+            <li>The special value undefined also stands apart. It makes a type of its own, just like null.</li>
+            <li>The meaning of undefined is “value is not assigned”.</li>
+            <li>If a variable is declared, but not assigned, then its value is undefined.</li>
+        </ul>
+    </div>
+
+    <script>
+      //Creating function for Onclick event 
+      function openData(evt, taskName) {
+        
+         //Declaring or Creating the variables
+        var i, container, dataLinks;  
+        
+        // Assigning the values
+        container = document.getElementsByClassName("container");  
+        
+        // Running loop for hide the container text
+        for (i = 0; i < container.length; i++) {                                     
+          container[i].style.display = "none";
+        }
+
+        //taking the Identity of button onClicking
+        dataLinks = document.getElementsByClassName("dataLinks");                     
+        for (i = 0; i < dataLinks.length; i++) {
+
+          //Replacing textContent of Container Onclicking
+          dataLinks[i].className = dataLinks[i].className.replace(                    
+            " active",
+            ""
+          );
+        }
+
+        //Blocking the textContent inside the Container
+        document.getElementById(taskName).style.display = "block";
+        
+            //target of the container is to be activate
+        evt.currentTarget.className += " active";                                 
+      }
+
+       //when Page is Open the default value to be displaying Initially
+      document.getElementById("defaultOpen").click();                                
+    </script>
+  </body>
+</html>

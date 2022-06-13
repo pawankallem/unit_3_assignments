@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  // Object.create() Inheritance model
+  let grandParents = {
+    GrandPha: "Narsayya",
+    GrandMaa: "Muthavva",
+  };
+
+  let Parent = Object.create(grandParents);
+  Parent.Mother = "Sharadha";
+
+  let me = Object.create(Parent);
+  me.name = "Pavan";
+  console.log("me:", me);
+
+  // // Constructor Function Inheritance
+
+  function myname() {
+    this.name = "pavan";
+    this.age = 24;
+  }
+
+  myname.prototype.mother = "sharadha";
+
+  let mother = new myname();
+
+  mother.constructor.Grandparent = "Narsayya";
+  mother.constructor.GrandParent = "Muthavva";
+  console.log("mother:", mother);
+</script>

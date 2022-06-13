@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            box-sizing: border-box;
+            height: 100vh;
+            width: 100%;
+            margin: 0px;
+        }
+        body>div:nth-child(1){
+            margin: auto;
+            width: 200px;
+            height: 30%;
+            padding: 50px;
+        }
+        body>div:nth-child(2){
+        margin: auto;
+        width: 200px;
+        height: 30%;
+        margin: 50px;
+        }
+        button{
+            width: 250px;
+            height: 250px;
+            margin-top: 80px;
+            background-color: black;
+            color: red;
+            border-radius: 20px;
+            font-size: 3em;
+            font-weight: bold;
+        }
+        #diesnum{
+           height: 250px;
+           width: 100%;
+           margin:80px 25px;
+        }
+        #diesnum>div{
+            height: 250px;
+            width: 250px;
+            margin: auto;
+            border-radius: 20px;
+            font-size: 10em;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button onclick="trowDice()">Throw Dice</button>
+    </div>
+    <div id="diesnum">
+        <div id="shownum"></div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    function trowDice(){
+        let num=(Math.floor(Math.random()*6));
+        console.log(num);
+        let parent=document.querySelector("#shownum");
+        parent.style.backgroundColor='skyblue';
+
+        if(num==0){
+           document.querySelector("#shownum").textContent=num+1;
+           parent.style.color="red";
+        }
+        else if(num==5){
+        document.querySelector("#shownum").textContent=num+1;
+        parent.style.color="green";
+        }
+        else{
+            document.querySelector("#shownum").textContent=num+1;
+            parent.style.color="black";
+        }
+        
+    }
+
+</script>

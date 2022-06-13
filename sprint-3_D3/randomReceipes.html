@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/navbar.css" />
+    <link rel="stylesheet" href="../sprint-3_D3/style/gridDisplay.css"/>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="displayContaineer"></div>
+  </body>
+</html>
+
+<script type="module">
+  import navbar from "./components/navbar.js";
+  import { getItems, appenedData } from "./components/asyncFun.js";
+
+
+  let shownav = document.getElementById("container");
+  shownav.innerHTML = navbar();
+
+  
+  let inputTerm;
+  let displayContaineer = document.getElementById("displayContaineer");
+
+
+  let response = getItems(
+      `http://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood`
+    );
+
+    displayContaineer.innerHTML="";
+    
+    response
+      .then((res) => {
+        appenedData(res, displayContaineer);
+      })
+      .catch((err) => {
+        console.log("err:", err);
+      });
+
+
+  document.querySelector("#search").addEventListener("click", () => {
+    displayContaineer.innerHTML = "";
+
+    inputTerm = document.getElementById("input").value;
+    let response = getItems(
+      `http://www.themealdb.com/api/json/v1/1/search.php?s=${inputTerm}`
+    );
+
+    response
+      .then((res) => {
+
+        appenedData(res, displayContaineer);
+      })
+      .catch((err) => {
+        console.log("err:", err);
+      });
+  });
+
+
+</script>

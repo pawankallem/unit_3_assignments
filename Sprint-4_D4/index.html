@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+      *{
+          margin: 0px;
+          box-sizing: border-box;
+      }
+      body{
+          height: 100vh;
+          display: grid;
+          grid-template-rows:5% 50% 30%;
+          padding: 20px;
+          grid-gap: 50px;
+      }
+    body>div {
+      border: 3px solid gray;
+      border-radius: 10px;
+    }
+    input
+   {
+      margin-top: 10px;
+      height: 50px;
+      width: 100%;
+    }
+    button {
+        margin-top: 20px;
+        height: 40px;
+        width: 50%;
+
+    }
+
+    #requests {
+      display: flex;
+      width: 100%;
+      gap: 10px;
+    }
+    #requests > div {
+      padding: 20px;
+      flex: 1;
+    }
+    #displayPro {
+      width: 100%;
+      height: 300px;
+    }
+    #displayPro{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        height: fit-content;
+        grid-gap: 50px;
+        padding: 50px 20px;
+        width: 100%;
+    }
+
+    #displayPro > div {
+      display: flex;
+      gap: 5px;
+      border: 1px solid gray;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+    }
+    #displayPro > div>h1 {
+      color: red;
+    }
+    #displayPro > div>p{
+      color: black;
+      text-decoration: underline;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    #displayPro > div>h2 {
+      color: green;
+    }
+    #title{
+        text-align: center;
+        font-size: 3em;
+        color: gray;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+  </style>
+  <body>
+      <p id="title">GET / POST / PUT / DELETE (Requests)</p>
+    <div id="requests">
+      <div>
+        <h1>Add Product</h1>
+        <input type="number" placeholder="id" id="id" />
+
+        <input type="name" placeholder="name" id="name" />
+
+        <input type="number" placeholder="price" id="price" />
+
+        <button onclick="addProduct()">Add Product</button>
+      </div>
+
+      <div>
+        <h1>Get Product Details</h1>
+        <button onclick="getProducts()">Get the Product Data</button>
+      </div>
+
+      <div>
+        <h1>Edit Product</h1>
+        <input type="number" placeholder="id" id="id_edit" />
+
+        <input type="name" placeholder="name" id="name_edit" />
+
+        <input type="number" placeholder="price" id="price_edit" />
+
+        <button onclick="editProduct()">Confirm Product</button>
+      </div>
+
+      <div>
+        <h1>Delete Product</h1>
+
+        <input type="text" id="delete_id" placeholder="Enter id to Delete" />
+
+        <button onclick="deleteProduct()">Delete Product</button>
+      </div>
+    </div>
+
+    <div id="displayPro"></div>
+  </body>
+</html>
+
+<script>
+  // --------------------------------------(Post Request)----------------------
+  async function addProduct() {
+    try {
+      let data = {
+        id: document.getElementById("id").value,
+        name: document.getElementById("name").value,
+        number: document.getElementById("price").value,
+      };
+
+      data = JSON.stringify(data);
+
+      let response = await fetch(`http://127.0.0.1:5000/api/products`, {
+        method: "POST",
+
+        body: data,
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let d = await response.json();
+      console.log("d:", d);
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+
+  // --------------------------------------(Get Request)----------------------
+
+  async function getProducts() {
+    try {
+      let res = await fetch("http://127.0.0.1:5000/api/products", {
+        method: "GET",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      let data = await res.json();
+      console.log("data:", data);
+
+      display(data);
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+
+  let disp = document.getElementById("displayPro");
+
+  let display = (data) => {
+    disp.innerHTML = "";
+    data.forEach((elem) => {
+      let div = document.createElement("div");
+
+      let sn = document.createElement("h1");
+      sn.innerText = `${elem.id}`;
+
+      let name = document.createElement("p");
+      name.innerText =  `${elem.name}`;
+
+      let price = document.createElement("h2");
+      price.innerText = `Price : ${elem.number}`;
+
+      div.append(sn, name, price);
+
+      disp.append(div);
+    });
+  };
+
+  // --------------------------------------(Put Request)----------------------
+
+  async function editProduct() {
+    try {
+      let data = {
+        id: document.getElementById("id_edit").value,
+        name: document.getElementById("name_edit").value,
+        number: document.getElementById("price_edit").value,
+      };
+
+      data = JSON.stringify(data);
+      console.log("data:", data);
+
+      let id = document.getElementById("id_edit").value;
+
+      let response = await fetch(`http://127.0.0.1:5000/api/products/${id}`, {
+        method: "PUT",
+
+        body: data,
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      let d = await response.json();
+      console.log("d:", d);
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+
+  // --------------------------------------(Delete Request)----------------------
+
+  async function deleteProduct() {
+    try {
+      let id = document.getElementById("delete_id").value;
+
+      let response = await fetch(`http://127.0.0.1:5000/api/products/${id}`, {
+        method: "DELETE",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      let data = await response.json();
+      console.log("data:", data);
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+</script>

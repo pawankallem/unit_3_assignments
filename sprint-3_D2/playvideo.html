@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        border: 1px solid;
+      }
+      *{
+        margin: 0px;
+        box-sizing: border-box;
+      }
+      body{
+          height: 100vh;
+          background-color: rgba(0, 0, 0, 0.877);
+          color: white;
+          width: 100%;
+      }
+
+      #navbar {
+        background-color: rgba(0, 0, 0, 0.863);
+        height: 50px;
+        width: 100%;
+        display: flex;
+        /* border: 2px solid red; */
+        gap:20px;
+      }
+      #ytlogo {
+          flex:3;
+        color: white;
+        font-size: 26px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        font-weight: bold;
+      }
+      #ytlogo > img {
+        height: 45px;
+        width: 40px;
+      }
+      #ytsearch {
+        width: 100%;
+        flex: 6;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+      #ytsearch > #search {
+          flex:5;
+        height: 30px;
+        width: 83%;
+        background-color: rgba(0, 0, 0, 0.89);
+        color: white;
+      }
+      #ytsearch > #button {
+          flex:1;
+        height: 30px;
+        width: 15%;
+        background-color: rgba(0, 0, 0, 0.89);
+        color: white;
+      }
+      #singin{
+        flex:3;
+      }
+
+      #main {
+        height: 600px;
+        display: flex;
+        margin-top: 10px;
+      }
+      #left {
+        flex: 3;
+        margin-left: 30px;
+        padding: 0px 10px;
+      }
+      #right {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <div id="ytlogo">
+        <img
+          src="https://i.ytimg.com/vi/IC6m249zvI0/hqdefault.jpg"
+          alt="YouTube"
+        />
+        YouTube
+      </div>
+      <div id="ytsearch">
+        <input type="text" id="search" placeholder="Search" />
+        <button onclick="youtube1()" id="button">Search</button>
+      </div>
+      <div id="singin"></div>
+    </div>
+
+    <div id="main">
+      <div id="left"></div>
+      <div id="right">suggetions</div>
+    </div>
+  </body>
+</html>
+
+<script>
+
+let search = document.getElementById("search");
+search.addEventListener("keyup", (event) =>{
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("button").click();
+    }
+});
+
+
+  let {
+    videoId,
+    snippet: { title },
+  } = JSON.parse(localStorage.getItem("pavan"));
+
+  let showvideo = document.querySelector("#left");
+
+  let titleOf = document.createElement("p");
+
+  let iframe = document.createElement("iframe");
+
+  iframe.src = `https://www.youtube.com/embed/${videoId}`;
+
+  iframe.width = "100%";
+
+  iframe.height = "90%";
+
+  iframe.setAttribute("allowfullscreen", true);
+
+  titleOf.innerText = title;
+
+  titleOf.height = "10%";
+
+  showvideo.append(iframe, titleOf);
+
+  localStorage.removeItem("pavan");
+
+  const youtube1=()=>{
+
+    let input=document.getElementById("search").value;
+
+    localStorage.setItem("homePage",JSON.stringify(input));
+
+    window.location.href="/sprint-3_D2/es6.html";
+
+  }
+</script>

@@ -1,0 +1,33 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+}
+body{
+    display: grid;
+    grid-gap: 20px;
+    padding: 10px;
+    
+}
+#navbar{
+    border: 2px solid rgba(128, 128, 128, 0.596);
+    border-radius: 8px;
+    height: 70px;
+    display: flex;
+    justify-content: right;
+    padding-right: 50px;
+    margin-top: 50px;
+}
+#navbar>button{
+    height: 50px;
+    width: 120px;
+    margin: 10px 20px;
+    border-radius: 10px;
+}
+
+#title{
+    font-size: 3em;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    margin-top: 30px;
+}

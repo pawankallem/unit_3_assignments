@@ -1,0 +1,47 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+}
+body{
+    display: grid;
+    grid-gap: 20px;
+    padding: 10px;
+    
+}
+#head{
+    border: 2px solid rgba(128, 128, 128, 0.596);
+    border-radius: 8px;
+    height: 50px;
+    text-align: right;
+    padding: 5px;
+    padding-right: 50px;
+    margin-top: 50px;
+}
+#head>button{
+    height: 35px;
+    width: 100px;
+}
+
+#showCartItems{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    text-align: center;
+    padding: 20px;
+    grid-gap: 40px;
+}
+#showCartItems >div{
+border: 2px solid rgba(128, 128, 128, 0.637);
+border-radius: 8px;
+padding: 10px;
+}
+
+#confirnOrder{
+    width: 150px;
+    margin: auto;
+    height: 50px;
+    background-color: green;
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 10px;
+}

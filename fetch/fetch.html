@@ -1,0 +1,43 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    City: <input type="text" id="city">
+   <button onclick="getWeather()">Search</button>
+</body>
+</html>
+
+<script>
+
+    // let url="https://fakestoreapi.com/carts";
+
+    // async function  getUser() {
+    //         let res=await fetch(url);
+    //         let response = await res.json();
+    //         console.log('response:', response)
+    //         // console.log(response);
+        
+    // }
+    //     getUser();
+        
+    //Real time whether getting
+    async function getWeather(){
+        let city=document.getElementById("city").value;
+        let res=await fetch
+        (
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ddc894a0a38425be12ca6bbf79cb31e5`
+
+        );
+
+        let data=await res.json();
+        console.log(data);
+    }
+    
+</script>

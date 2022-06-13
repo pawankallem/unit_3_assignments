@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/navbar.css" />
+    <link rel="stylesheet" href="../styles/homePage.css"/>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="bodyContainer">
+
+      <div id="showRepos"></div>
+      <div id="rightSide"></div>
+    </div>
+  </body>
+</html>
+
+<script type="module">
+  import navbar from "../components/navbar.js";
+
+  import getDetails from "../scripts/userDetails.js";
+
+  let response;
+
+  let showRepos = document.getElementById("showRepos");
+
+  let container = document.getElementById("container");
+
+  container.innerHTML = navbar();
+
+  let input = document.getElementById("search-input");
+
+  input.addEventListener("keypress", searchDetails);
+
+  async function searchDetails(event) {
+    try {
+      if (event.key === "Enter") {
+        let query = input.value;
+
+        response = await getDetails(query);
+
+        let { avatar_url } = response;
+
+        document.getElementById("profile-img").src = avatar_url;
+
+        showrepo();
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+
+  async function showrepo() {
+    try {
+      let res = await fetch(response.repos_url);
+
+      let repo_data = await res.json();
+
+      mapdata(repo_data);
+
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+
+
+  function mapdata(data) {
+
+    showRepos.innerHTML="";
+    
+    data.forEach((elem)=>{
+
+      let div=document.createElement("div");
+
+      let img=document.createElement("img");
+      img.src=elem.owner.avatar_url;
+
+      let anchor=document.createElement("a");
+      anchor.append(elem.full_name)
+
+      div.append(img,anchor);
+
+      showRepos.append(div);
+      
+      console.log('elem:', elem)
+
+    })
+  }
+
+</script>

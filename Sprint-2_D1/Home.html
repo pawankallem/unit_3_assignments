@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+        height: 100vh;
+        box-sizing: border-box;
+        /* background-color: teal; */
+      }
+      #fullDisplay {
+        display: grid;
+        grid-template-rows: 100px 1000px;
+        grid-gap: 30px;
+      }
+      #fullDisplay > div:nth-child(1) {
+        height: 90%;
+        background-color: orangered;
+        align-items: center;
+      }
+      #navbar {
+        display: flex;
+        width: 100%;
+        justify-content: right;
+        padding-right: 30px;
+      }
+      #navbar > a,
+      p {
+        height: 60px;
+        width: 130px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font-size: 30px;
+        color: rgb(58, 54, 54);
+        border: 1px solid transparent;
+        background-color: transparent;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      /* slides starts */
+      #fullDisplay > div:nth-child(2) {
+        height: fit-content;
+      }
+      #slides {
+        height: 450px;
+        width: 100%;
+        margin: auto;
+        margin-bottom: 40px;
+      }
+      #slides > img {
+        width: 100%;
+        height: 450px;
+      }
+
+
+      /* movies start-------------------- */
+
+
+      #movie{
+          display: grid;
+          grid-template-columns: repeat(3,1fr);
+          height: fit-content;
+          padding:5%;
+          grid-gap: 3%;
+          padding-bottom: 150px;
+          margin-top: -630px;
+      }
+      #movie>div{
+          display: flex;
+          flex-direction: column;
+          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+          height: 650px;
+          margin-bottom: 20px;
+          border-radius: 20px;
+          overflow: hidden;
+      }
+      #movie>div>button{
+         background-color: red;
+         font-size: 32px;
+         font-weight: bold;
+      }
+      #movie>div>div{
+          font-size: 30px;
+          font-weight: bold;
+          padding-left: 10px;
+          
+      }
+
+      /* -----------------sorting---------- */
+      #sorting>select{
+        height: 70px;
+        margin-left: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 10px;
+        border: 2px solid ;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fullDisplay">
+      <div id="navbar">
+        <a href="Home.html"><p>Home</p></a>
+        <a href="Login.html"><p>Login</p></a>
+        <a href="Signup.html"><p>Singup</p></a>
+      </div>
+      <div>
+        <div id="slides"></div>
+        <div id="sorting">
+            <select id="ratingSort" onchange="change()">
+                <option >Sort by Rating</option>
+                <option value="high">High to Low</option>
+                <option value="low">Low to High</option>
+                <option value="atoz">A to Z  </option>
+                <option value="ztoa">Z to A</option>
+            </select>
+        </div>
+        <div id="movie">        
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+
+    // -------------------slides start-----------------
+
+  let slides = JSON.parse(localStorage.getItem("images"));
+  let slideshow = document.getElementById("slides");
+
+    let img = document.createElement("img");
+    img.src = slides[0];
+
+    slideshow.append(img);
+    let i = 1;
+
+    setInterval(function () {
+      if (i == slides.length) {
+        i = 0;
+      }
+      img.src = slides[i];
+      i++;
+
+      slideshow.append(img);
+    }, 3000);
+
+// ---------------------------------slides over----------------
+
+
+let movies=JSON.parse(localStorage.getItem("movies"));
+
+let container=document.getElementById("movie");
+
+showMovies(movies);
+
+function showMovies(movies){
+        container.innerHTML="";
+
+        movies.map(function(elem){
+            
+            let div=document.createElement("div");
+
+            let mvimg=document.createElement("img");
+            mvimg.src=elem.img;
+            mvimg.style.width="100%";
+            mvimg.style.height="70%";
+            
+            let mvname=document.createElement("div");
+            mvname.textContent=elem.name;
+
+            let mvrating=document.createElement("div");
+            mvrating.textContent=elem.rating;
+
+            let mvdate=document.createElement("div");
+            mvdate.textContent=elem.releaseDate;
+
+            let booknow=document.createElement("button");
+            booknow.textContent="Book Now";
+
+            div.append(mvimg,mvname,mvrating,mvdate,booknow);
+
+            container.append(div);
+
+        })
+}
+
+
+function change(){
+    let sortvalue=document.getElementById("ratingSort").value;
+    if(sortvalue=="high"){
+      movies.sort(function(a,b){
+
+        if(a.rating>b.rating){return -1};
+        if(a.rating<b.rating){return 1};
+        return 0;
+      })
+
+    }
+    if(sortvalue=="low"){
+      movies.sort(function (a,b){
+        
+        if(a.rating>b.rating){return 1};
+        if(a.rating<b.rating){return -1};
+        return 0;
+      })
+    }
+    if(sortvalue=="atoz"){
+      movies.sort(function (a,b){
+        if(a.name>b.name){
+          return 1;
+        };
+        if(a.name<b.name){return -1};
+        return 0;
+      });
+    }
+    if(sortvalue=="ztoa"){
+      movies.sort(function(a,b){
+        if(a.name>b.name){return -1};
+        if(a.name<b.name){return 1};
+        return 0;
+      });
+    
+    }
+
+    showMovies(movies);
+}
+
+
+</script>

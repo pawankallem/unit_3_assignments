@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      body {
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 150px 300px;
+        background-color: green;
+        color: white;
+      }
+      #header {
+        padding: 10px;
+        margin: auto;
+        width: 50%;
+        display: grid;
+        grid-template-columns: 1fr;
+
+      }
+      input {
+        height: 50px;
+        font-size: 22px;
+        border-radius: 30px;
+      }
+      #showMovies {
+        height: fit-content;
+        background-color: black;
+        color: white;
+        border-radius: 30px;
+        overflow: hidden;
+      }
+      #showMovies > div > img {
+        width: 100px;
+        height: 80px;
+        margin-right: 20px;
+      }
+      #showMovies > div {
+        display: flex;
+        margin: 10px;
+      }
+      #onclickMovie {
+        width: 25%;
+        margin:0px auto;
+        margin-bottom: 40px;
+      }
+      #onclickMovie{
+          display: flex;
+      }
+      #onclickMovie>div:nth-child(2){
+          padding: 30px;
+          font-size: 20px;
+          font-weight: bold;
+          align-items: center;
+      }
+      p{
+        justify-content: center;
+          align-content:flex-end;
+          display : flex;
+          margin: 20px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <input
+        oninput="debounce(getMovie,1000)"
+        type="text"
+        id="movie"
+        placeholder="Enter Movie Name"
+      />
+      <div id="showMovies"></div>
+    </div>
+
+    <div id="onclickMovie"></div>
+  </body>
+</html>
+
+<script>
+  let showMovies = document.querySelector("#showMovies");
+
+  let movieWaiting;
+
+  async function getMovie() {
+    try {
+      let movie = document.getElementById("movie").value;
+
+      if (movie.length <= 2) {
+        return false;
+      }
+
+      let s = await fetch(`http://www.omdbapi.com/?apikey=cdbc8ebc&s=${movie}`);
+
+      let response = await s.json();
+
+      showMovie(response.Search);
+    } catch (err) {
+      console.log("err:", err);
+    }
+  }
+
+  function showMovie(data) {
+    showMovies.innerHTML = "";
+
+    if (data === undefined) {
+      return false;
+    }
+
+    data.map(function (element, index) {
+      let div = document.createElement("div");
+
+      let img = document.createElement("img");
+      img.alt = "NO Image";
+      if (data[index].Poster != "N/A") {
+        img.src = data[index].Poster;
+      }
+
+      let name = document.createElement("div");
+      name.innerText = data[index].Title;
+
+      div.append(img, name);
+
+      showMovies.append(div);
+
+      div.addEventListener("click", function () {
+        hi(element);
+      });
+    });
+  }
+
+  function debounce(func, delay) {
+    if (movieWaiting) {
+      clearTimeout(movieWaiting);
+    }
+
+    movieWaiting = setTimeout(function () {
+      func();
+    }, delay);
+  }
+
+  let onclickMovie = document.getElementById("onclickMovie");
+
+  function hi(event) {
+
+    showMovies.innerHTML = "";
+    onclickMovie.innerHTML="";
+
+    let div=document.createElement("div");
+    let div1=document.createElement("div");
+
+    let img = document.createElement("img");
+    img.src = event.Poster;
+    img.alt = "No Image Found";
+    img.style.height="100%";
+    img.style.width="100%";
+
+    let name=document.createElement("p");
+    name.innerText=`Movie Name : ${event.Title}`;
+
+    let date=document.createElement("p");
+    date.innerText=`Releasing Date : ${event.Year}`;
+
+    div.append(img);
+    div1.append(name,date);
+
+    onclickMovie.append(div,div1);
+    console.log(event);
+    console.log("hi");
+  }
+</script>

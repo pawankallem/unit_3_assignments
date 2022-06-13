@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        #fullDisplay{
+            display: grid;
+            grid-template-rows: 10% 80%;
+            grid-gap: 30px;
+        }
+        #fullDisplay>div:nth-child(1){
+            margin-top: 40px;
+            height: 60px;
+            background-color:orangered;
+        }
+        #navbar{
+            display: flex;
+            width: 100%;
+            justify-content: right;
+            padding-right: 30px;
+        }
+        #navbar>a,p{
+            height:60px;
+            width: 130px;
+           justify-content: center;
+           align-items: center;
+           display: flex;
+           font-size: 24px;
+           color: rgb(58, 54, 54);
+           border: 1px solid transparent;
+           background-color: transparent;
+           font-weight: bold;
+           text-decoration:none ;
+        }
+        #fullDisplay>div:nth-child(2){
+            margin: auto;
+            width: 25%;
+            height: 450px;
+            border-radius: 10px;
+           padding: 30px;
+           padding-top: 30px;
+            background-color: orangered;
+        }
+        #singupForm>input{
+            display: grid;
+            grid-template-rows: repeat(4,100px);
+            height: 40px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 2px solid orangered;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        #singupForm>label{
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        #singupForm>#submit{
+            font-size: 22px;
+            font-weight: bold;
+            height: 40px;
+            width: 50%;
+            margin-top: 30px;
+            color: rgb(73, 68, 68);
+            margin-left: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div id="fullDisplay">
+        <div id="navbar">
+            <a href="Home.html"><p>Home</p></a>
+            <a href="Login.html"><p>Login</p></a>
+            <a href="Signup.html"><p>Singup</p></a>
+        </div>
+        <div>
+            <form id="singupForm">
+                <label>Name</label>
+                <input type="text" id="name">
+                <label>Phone Number</label>
+                <input type="number" id="num">
+                <label>Email Id</label>
+                <input type="email" id="mail">
+                <label>Password</label>
+                <input type="password" id="psd">
+                <input id="submit" type="submit" value="Sign Up">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    let arr=JSON.parse(localStorage.getItem("UserDetails"))||[] ;
+
+    document.querySelector("#singupForm").addEventListener("submit",verifyDetails);
+    function verifyDetails(event){
+        event.preventDefault();
+        
+        let obj={
+            name:document.querySelector("#name").value,
+            number:document.querySelector("#num").value,
+            mail:document.querySelector("#mail").value,
+            psd:document.querySelector("#psd").value
+        }
+        if(obj.name==0){
+            alert(" Name is not Mentioned")
+        }
+        else if(obj.number.length!=10){
+            alert("Please Enter 10 digit Phone Number");
+        }
+        else if(obj.mail==0){
+            alert("Please Enter your mail Id");
+        }
+        else{
+                    arr.push(obj);
+                    console.log(arr);
+                    localStorage.setItem("UserDetails",JSON.stringify(arr));
+                    window.location.href="Login.html";          
+        }
+       
+    }
+</script>

@@ -1,0 +1,23 @@
+
+
+#displayContaineer>div>img{
+    height: 90%;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+img:hover{
+  cursor: pointer;
+  border: 2px solid rgba(128, 128, 128, 0.76);
+  
+}
+#displayContaineer{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 30px;
+  padding: 50px;
+  justify-content: center;
+  grid-template-rows: repeat(250px);
+
+  
+}

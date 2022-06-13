@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  function myArray() {
+    this.length = arguments.length;
+    Object.defineProperty(this, "length", {
+      writable: true,
+      enumerable: false,
+    });
+    for (let i = 0; i < arguments.length; i++) {
+      this[i] = arguments[i];
+    }
+  }
+
+  // -----------------------Customised Own Push Function------------------------------------------------
+
+  myArray.prototype.MyPush = function (el) {
+    this[this.length] = el;
+    this.length++;
+  };
+  custome_array = new myArray(1, 2, 3);
+  custome_array.MyPush(4);
+  custome_array.MyPush(5);
+  // console.log(Object.values(custome_array));
+  // -------------------Customised Own Pop Function----------------------------------------------
+
+  myArray.prototype.MyPop = function () {
+    let index = this.length - 1;
+    delete this[index];
+    this.length--;
+  };
+  custome_array.MyPop();
+  custome_array.MyPop();
+  // console.log(Object.values(custome_array));
+  // ------------------Customised Own Reverse Function---------------------------------------------------------
+
+  let a = new myArray(5, 4, 3, 2, 1);
+  myArray.prototype.MyRevese = function () {
+    let left = 0;
+    let right = this.length - 1;
+    while (left < right) {
+      let temp = this[left];
+      this[left] = this[right];
+      this[right] = temp;
+      left++;
+      right--;
+    }
+    return Object.values(this);
+  };
+
+  //    console.log(custome_array.MyRevese());
+  //    console.log(a.MyRevese());
+
+  // ----------------Return First Elem From Array-------------------------
+
+  myArray.prototype.firstElem = function () {
+    return this[0];
+  };
+  console.log(a.firstElem());
+
+// -------------------------------------------------------------------
+</script>

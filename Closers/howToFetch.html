@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  let url = "https://reqres.in/api/users";
+
+  // request and responce // .then and .catch (((((Fetch data)))))
+
+  // fetch(url).then(function (res){
+  // return res.json();
+
+  // })
+  // .then(function(res){
+  //     console.log(res);
+  // })
+  // .catch(function(er){
+  //     console.log(er);
+  // })
+
+  // Async and await data FETCH
+
+  async function getData() {
+
+    try{
+        let x = await fetch(url);
+
+        let data=await x.json();
+
+        console.log('data:', data)
+    }
+    catch(err){
+        console.log('err:', err)
+
+    }
+
+    
+  }
+
+  getData();
+
+
+
+</script>

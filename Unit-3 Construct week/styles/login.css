@@ -1,0 +1,256 @@
+
+* {
+  margin: 0px;
+  box-sizing: border-box;
+}
+#login_body {
+  display: grid;
+  grid-template-rows: 30px 600px;
+  font-size: 14px;
+  padding: 20px;
+  border: 2px solid red;
+}
+
+
+#home_login {
+  align-items: center;
+  display: flex;
+  padding-left: 20px;
+}
+#customer_login {
+  display: grid;
+  grid-template-rows: 40px;
+}
+#login_or_singup {
+  display: flex;
+  width: 100%;
+  padding: 30px 10px;
+  gap: 30px;
+}
+#customer_title {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 20%;
+  margin: auto;
+  height: 50px;
+  /* font-size: 20px; */
+}
+#customer_title > h2 > span {
+  color: orangered;
+}
+#login_or_singup > div {
+  flex: 1;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  padding-bottom: 50px;
+}
+#login_or_singup > div:nth-child(2) {
+  height: 85%;
+}
+
+#singup {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 17% 80%;
+}
+.flex_div {
+  display: flex;
+  height: 100%;
+  gap: 20px;
+}
+.flex_div > div {
+  flex: 1;
+  display: grid;
+  grid-gap: 10%;
+  grid-template-rows:20% 50% 10%;
+  /* border: 2px solid red; */
+}
+.flex_div > div > input {
+  height: 100%;
+  width: 100%;
+  font-size: 70%;
+  
+}
+#reg_btn {
+  height: 35px;
+}
+.red_star {
+  color: red;
+}
+#form {
+  height: 100%;
+  display: grid;
+  grid-gap: 5%;
+}
+#form button {
+  background-color: orangered;
+  height: 100%;
+  width: 30%;
+  border: transparent;
+  font-size: 70%;
+}
+.alert_class {
+  color: red;
+}
+
+/* login */
+#login {
+  display: grid;
+  grid-template-rows: 17% 80%;
+}
+#user_login {
+  line-height: 30px;
+  
+}
+#login_form {
+  display: grid;
+  grid-gap: 1%;
+  grid-template-rows: 25% 5% 25% 7% 25% 12%;
+  
+}
+#forgot_psd {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid gray;
+  align-items: center;
+  margin-top: 1%;
+}
+#sing_in {
+  flex: 1;
+  height: 40px;
+  width: 120px;
+  background-color: orangered;
+    font-size: 70%;
+}
+#new_account {
+  line-height: 20px;
+}
+#forgot_id {
+  flex: 3;
+  height: 60%;
+  padding-top: 5px;
+}
+#btn_forgot_link {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+.input_grid {
+  display: grid;
+  /* border: 2px solid black; */
+}
+.input_grid > input {
+  height: 35px;
+  width: 100%;
+  font-size: 70%;
+
+}
+#align_right {
+  text-align: right;
+  
+}
+#google_icon {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  margin: auto;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 23px;
+  margin-bottom: 20px;
+}
+
+/* or line */
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(51, 51, 51, 0.39);
+  color: rgba(51, 51, 51, 0.712);
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+}
+
+hr:after {
+  background: #fff;
+  content: "OR";
+  padding: 0 5px;
+  position: relative;
+  top: -9px;
+}
+
+/* or OVER */
+.hide_alert {
+  display: none;
+  color: red;
+}
+
+
+
+/* Media query starts */
+@media only screen and (min-width:0px) and (max-width:390px){
+  #login_body{
+    padding:3%;
+    display: grid;
+    grid-template-rows: 30px 1500px;
+    width:100%;
+    gap: 30px;
+    font-size: 14px;
+
+  }
+  #customer_login {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows:1% 90%;
+    grid-gap: 5%;
+    width: 100%;
+  }
+  #customer_login>#login_or_singup{
+    display: grid;
+    grid-template-rows: repeat(2,50%);
+    width: 100%;
+
+  }
+  #login_or_singup > div {
+    width:100%;
+    border-radius:20px;
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    padding-bottom: 30%;
+    /* background-color: teal; */
+    height:100%;
+  }
+  #login_or_singup > div :nth-child(2){
+    /* height:200px ; */
+  }
+  
+  #customer_login>#customer_title{
+    width:85%;
+    margin: 0%;
+  }
+
+  #singup {
+    grid-template-rows: 25% 75%;
+  }
+  .flex_div > div {
+    margin-bottom: 10%;
+  }
+
+  .flex_div > div > input {
+    height: 100%;
+    width: 100%;
+    font-size: 70%;
+    margin: 5% 0% 5%;
+  }
+
+}
+
+
+/* media query ends */
